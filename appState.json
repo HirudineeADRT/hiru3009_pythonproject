@@ -43,7 +43,7 @@
         "children": [],
         "isRemovable": true,
         "filePath": "hiru3009_pythonproject/newpy.py",
-        "code": "import boto3\nsns = boto3.client(\"sns\")\n\ndef handler(event, context):\n    \n    data = sns.get_topic_attributes(\n        TopicArn='arn:aws:sns:us-east-1:318300609668:hirutest'\n    )\n    print(data)\n\n    try:\n        data = sns.unsubscribe(\n            SubscriptionArn='arn:aws:sns:us-east-1:318300609668:hirutest:jj'\n        )\n    except BaseException as e:\n        print(e)\n        raise(e)\n\n    \n\n    return {\"message\": \"Successfully executed\"}\n",
+        "code": "import boto3\nses = boto3.client(\"ses\")\nsns = boto3.client(\"sns\")\n\ndef handler(event, context):\n    \n    try:\n        data = ses.send_email(\n    \t\tDestination={\n    \t\t    \"ToAddresses\": ['hirudineel@gmail.com'],\n    \t\t\t\"CcAddresses\": [],\n    \t\t\t\"BccAddresses\": []\n    \t\t},\n    \t\tMessage={\n    \t\t\t\"Body\": {\n    \t\t\t    \"Text\": {\n    \t\t\t\t\t\"Data\": 'Sample body'\n    \t\t\t\t}\n    \t\t\t},\n    \t\t\t\"Subject\": { \n    \t\t\t\t\"Data\": 'This is a test'\n    \t\t\t}\n    \t\t},\n    \t\tSource='hirudinee@adroitlogic.com'\n        )\n    except BaseException as e:\n        print(e)\n        raise(e)\n  \n\n    return {\"message\": \"Successfully executed\"}\n",
         "config": {
           "runtime": "python2.7",
           "handler": "handler",
@@ -123,6 +123,24 @@
           "topicDisplayName": "",
           "subscriptions": []
         }
+      },
+      "ses-hirudinee@adroitlogic.com": {
+        "name": "ses-hirudinee@adroitlogic.com",
+        "type": "SES",
+        "config": {
+          "selectedIdentity": "hirudinee@adroitlogic.com",
+          "projectRegion": "us-east-1",
+          "params": {
+            "to": "hirudineel@gmail.com",
+            "cc": "",
+            "bcc": "",
+            "subject": "This is a test",
+            "body": {
+              "text": "Sample body",
+              "html": ""
+            }
+          }
+        }
       }
     },
     "customTemplate": {
@@ -166,7 +184,7 @@
     "projectRegion": "us-east-1",
     "platform": "AWS",
     "platformRegions": {},
-    "lastSave": 1569837283301
+    "lastSave": 1569838200053
   },
   "VCS_STATE": {
     "provider": "GitHub",

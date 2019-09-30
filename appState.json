@@ -43,7 +43,7 @@
         "children": [],
         "isRemovable": true,
         "filePath": "hiru3009_pythonproject/newpy.py",
-        "code": "import boto3\nses = boto3.client(\"ses\")\nsns = boto3.client(\"sns\")\n\ndef handler(event, context):\n    \n    try:\n        data = ses.send_email(\n    \t\tDestination={\n    \t\t    \"ToAddresses\": ['hirudineel@gmail.com'],\n    \t\t\t\"CcAddresses\": [],\n    \t\t\t\"BccAddresses\": []\n    \t\t},\n    \t\tMessage={\n    \t\t\t\"Body\": {\n    \t\t\t    \"Text\": {\n    \t\t\t\t\t\"Data\": 'Sample body'\n    \t\t\t\t}\n    \t\t\t},\n    \t\t\t\"Subject\": { \n    \t\t\t\t\"Data\": 'This is a test'\n    \t\t\t}\n    \t\t},\n    \t\tSource='hirudinee@adroitlogic.com'\n        )\n        print(data)\n    except BaseException as e:\n        print(e)\n        raise(e)\n  \n\n    return {\"message\": \"Successfully executed\"}\n",
+        "code": "import boto3\ns3 = boto3.client(\"s3\")\nses = boto3.client(\"ses\")\nsns = boto3.client(\"sns\")\n\ndef handler(event, context):\n    \n    try:\n        data = ses.send_email(\n    \t\tDestination={\n    \t\t    \"ToAddresses\": ['hirudineel@gmail.com'],\n    \t\t\t\"CcAddresses\": [],\n    \t\t\t\"BccAddresses\": []\n    \t\t},\n    \t\tMessage={\n    \t\t\t\"Body\": {\n    \t\t\t    \"Text\": {\n    \t\t\t\t\t\"Data\": 'Sample body'\n    \t\t\t\t}\n    \t\t\t},\n    \t\t\t\"Subject\": { \n    \t\t\t\t\"Data\": 'This is a test'\n    \t\t\t}\n    \t\t},\n    \t\tSource='hirudinee@adroitlogic.com'\n        )\n        print(data)\n    except BaseException as e:\n        print(e)\n        raise(e)\n\n        try:\n            data = s3.list_objects(\n                Bucket='hirudinee0508',\n                MaxKeys=10,\n                Prefix=''\n            )\n            print(data)\n            \"\"\"\n            data = {\n                \"Contents\": [\n                   {\n                      \"ETag\": \"\\\"70ee1738b6b21e2c8a43f3a5ab0eee71\\\"\",\n                      \"Key\": \"example1.jpg\",\n                      \"LastModified\": \"<Date Representation>\",\n                      \"Owner\": {\n                         \"DisplayName\": \"myname\",\n                         \"ID\": \"12345example25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc\"\n                      },\n                      \"Size\": 11,\n                      \"StorageClass\": \"STANDARD\"\n                   },\n                   # {...}\n               ]\n            }\n            \"\"\"\n        except BaseException as e:\n            print(e)\n        \n  \n\n    return {\"message\": \"Successfully executed\"}\n",
         "config": {
           "runtime": "python2.7",
           "handler": "handler",
@@ -141,6 +141,17 @@
             }
           }
         }
+      },
+      "s3hirudinee0508": {
+        "name": "s3hirudinee0508",
+        "type": "S3",
+        "config": {
+          "mode": 1,
+          "bucket": {
+            "region": "us-east-1",
+            "name": "hirudinee0508"
+          }
+        }
       }
     },
     "customTemplate": {
@@ -184,7 +195,7 @@
     "projectRegion": "us-east-1",
     "platform": "AWS",
     "platformRegions": {},
-    "lastSave": 1569838606222
+    "lastSave": 1569839202782
   },
   "VCS_STATE": {
     "provider": "GitHub",

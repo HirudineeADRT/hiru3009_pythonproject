@@ -43,7 +43,7 @@
         "children": [],
         "isRemovable": true,
         "filePath": "hiru3009_pythonproject/newpy.py",
-        "code": "import boto3\nsns = boto3.client(\"sns\")\n\ndef handler(event, context):\n    try:\n        data = sns.get_topic_attributes(\n            TopicArn='arn:aws:sns:us-east-1:318300609668:hirutest'\n        )\n        print(data)\n    except BaseException as e:\n        print(e)\n        raise(e)\n    \n    return {\"message\": \"Successfully executed\"}\n",
+        "code": "import boto3\nsns = boto3.client(\"sns\")\n\ndef handler(event, context):\n    \n    data = sns.get_topic_attributes(\n        TopicArn='arn:aws:sns:us-east-1:318300609668:hirutest'\n    )\n    print(data)\n\n    try:\n        data = sns.unsubscribe(\n            SubscriptionArn='arn:aws:sns:us-east-1:318300609668:hirutest:jj'\n        )\n    except BaseException as e:\n        print(e)\n        raise(e)\n\n    \n\n    return {\"message\": \"Successfully executed\"}\n",
         "config": {
           "runtime": "python2.7",
           "handler": "handler",
@@ -56,7 +56,16 @@
             "resourceName": "apigusEast1sachithraAPInamehiruidneeget",
             "config": {}
           }
-        ]
+        ],
+        "testCases": {
+          "96190ad4-54c0-49df-92aa-2f3e29e89a2d": {
+            "id": "96190ad4-54c0-49df-92aa-2f3e29e89a2d",
+            "name": "Test event",
+            "functionId": "d8943da9-dc10-4db5-af8f-a0720f41b5d0",
+            "event": "{\"key1\": \"value1\", \"key2\": \"value2\", \"key3\": \"value3\"}",
+            "eventTemplate": "hello-world"
+          }
+        }
       },
       "c4bd3201-62c6-46e9-8778-22b5eee03c04": {
         "id": "c4bd3201-62c6-46e9-8778-22b5eee03c04",
@@ -111,7 +120,7 @@
           "topicArn": "arn:aws:sns:us-east-1:318300609668:hirutest",
           "topicRegion": "us-east-1",
           "snsType": 0,
-          "topicDisplayName": "hirutest",
+          "topicDisplayName": "",
           "subscriptions": []
         }
       }
@@ -157,7 +166,7 @@
     "projectRegion": "us-east-1",
     "platform": "AWS",
     "platformRegions": {},
-    "lastSave": 1569831026230
+    "lastSave": 1569837283301
   },
   "VCS_STATE": {
     "provider": "GitHub",

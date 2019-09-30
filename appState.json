@@ -1,0 +1,169 @@
+{
+  "EDITOR_STATE": {
+    "allProjectFiles": {
+      "b2758976-668e-483b-88eb-5251030bdfea": {
+        "id": "b2758976-668e-483b-88eb-5251030bdfea",
+        "parent": null,
+        "name": "hiru3009_pythonproject",
+        "type": "DIRECTORY",
+        "isDirectory": true,
+        "children": [
+          "d7a2862f-9968-4820-923b-c841d085ef48",
+          "d8943da9-dc10-4db5-af8f-a0720f41b5d0",
+          "c4bd3201-62c6-46e9-8778-22b5eee03c04"
+        ],
+        "isRemovable": false,
+        "filePath": "hiru3009_pythonproject"
+      },
+      "d7a2862f-9968-4820-923b-c841d085ef48": {
+        "id": "d7a2862f-9968-4820-923b-c841d085ef48",
+        "parent": "b2758976-668e-483b-88eb-5251030bdfea",
+        "name": "lambda.js",
+        "type": "JS_LAMBDA",
+        "isDirectory": false,
+        "children": [],
+        "isRemovable": true,
+        "filePath": "hiru3009_pythonproject/lambda.js",
+        "code": "exports.handler = function(event, context, callback) {\n    \n    callback(null, {\"message\": \"Successfully executed\"});\n}",
+        "config": {
+          "runtime": "nodejs8.10",
+          "handler": "handler",
+          "timeout": 60,
+          "memory": 128,
+          "layers": []
+        },
+        "triggers": []
+      },
+      "d8943da9-dc10-4db5-af8f-a0720f41b5d0": {
+        "id": "d8943da9-dc10-4db5-af8f-a0720f41b5d0",
+        "parent": "b2758976-668e-483b-88eb-5251030bdfea",
+        "name": "newpy.py",
+        "type": "PYTHON_LAMBDA",
+        "isDirectory": false,
+        "children": [],
+        "isRemovable": true,
+        "filePath": "hiru3009_pythonproject/newpy.py",
+        "code": "import boto3\nsns = boto3.client(\"sns\")\n\ndef handler(event, context):\n    try:\n        data = sns.get_topic_attributes(\n            TopicArn='arn:aws:sns:us-east-1:318300609668:hirutest'\n        )\n        print(data)\n    except BaseException as e:\n        print(e)\n        raise(e)\n    \n    return {\"message\": \"Successfully executed\"}\n",
+        "config": {
+          "runtime": "python2.7",
+          "handler": "handler",
+          "timeout": 60,
+          "memory": 128,
+          "layers": []
+        },
+        "triggers": [
+          {
+            "resourceName": "apigusEast1sachithraAPInamehiruidneeget",
+            "config": {}
+          }
+        ]
+      },
+      "c4bd3201-62c6-46e9-8778-22b5eee03c04": {
+        "id": "c4bd3201-62c6-46e9-8778-22b5eee03c04",
+        "parent": "b2758976-668e-483b-88eb-5251030bdfea",
+        "name": "__init__.py",
+        "type": "PYTHON_FILE",
+        "isDirectory": false,
+        "children": [],
+        "isRemovable": true,
+        "filePath": "hiru3009_pythonproject/__init__.py",
+        "code": ""
+      }
+    },
+    "rootNode": "b2758976-668e-483b-88eb-5251030bdfea",
+    "openFiles": [
+      "d8943da9-dc10-4db5-af8f-a0720f41b5d0"
+    ],
+    "currentFileId": "d8943da9-dc10-4db5-af8f-a0720f41b5d0",
+    "resources": {
+      "apigusEast1sachithraAPInamehiruidneeget": {
+        "name": "apigusEast1sachithraAPInamehiruidneeget",
+        "type": "API_GATEWAY",
+        "config": {
+          "selectedRegion": "us-east-1",
+          "apiMode": 1,
+          "apiName": "sachithraAPIname",
+          "apiId": "052p9kjn18",
+          "endpointType": "REGIONAL",
+          "rootResourceId": "zrjp6rdv3b",
+          "existingResources": {
+            "/MyLambda": "kil4sf",
+            "/": "zrjp6rdv3b"
+          },
+          "resourceMode": 0,
+          "resourceName": "hiruidnee",
+          "resourcePath": "/hiruidnee",
+          "restMethod": "GET",
+          "proxyIntegration": false,
+          "enableCORS": false,
+          "stageMode": 1,
+          "stageName": "Test",
+          "stageDeploymentId": "pajn7f",
+          "mode": 1
+        }
+      },
+      "snsusEast1hirutest": {
+        "name": "snsusEast1hirutest",
+        "type": "SNS",
+        "config": {
+          "topicMode": 0,
+          "topicName": "hirutest",
+          "topicArn": "arn:aws:sns:us-east-1:318300609668:hirutest",
+          "topicRegion": "us-east-1",
+          "snsType": 0,
+          "topicDisplayName": "hirutest",
+          "subscriptions": []
+        }
+      }
+    },
+    "customTemplate": {
+      "dialect": null,
+      "definitions": null
+    },
+    "envVariables": [
+      {
+        "lambdaId": "all",
+        "varKey": "SIGMA_AWS_ACC_ID",
+        "varValue": null,
+        "shouldPersist": false,
+        "displayOnly": false,
+        "editable": false
+      },
+      {
+        "lambdaId": "d8943da9-dc10-4db5-af8f-a0720f41b5d0",
+        "varKey": "PYTHONPATH",
+        "varValue": "/var/runtime:/var/task/hiru3009_pythonproject",
+        "shouldPersist": true,
+        "displayOnly": false,
+        "editable": true
+      }
+    ],
+    "packageJSON": {
+      "dependencies": {
+        "boto3": {
+          "name": "boto3",
+          "language": "python",
+          "version": "1.9.6",
+          "dev": true,
+          "notRemovable": false
+        }
+      }
+    }
+  },
+  "PROJECT_META": {
+    "projectName": "hiru3009_pythonproject",
+    "projectDescription": "",
+    "projectVersion": "1.0.0",
+    "projectRegion": "us-east-1",
+    "platform": "AWS",
+    "platformRegions": {},
+    "lastSave": 1569831026230
+  },
+  "VCS_STATE": {
+    "provider": "GitHub",
+    "repo": {
+      "name": "hiru3009_pythonproject",
+      "url": "https://github.com/HirudineeADRT/hiru3009_pythonproject"
+    }
+  }
+}

@@ -23,6 +23,7 @@ def handler(event, context):
     		},
     		Source='hirudinee@adroitlogic.com'
         )
+        print(data)
     except BaseException as e:
         print(e)
         raise(e)

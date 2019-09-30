@@ -43,7 +43,7 @@
         "children": [],
         "isRemovable": true,
         "filePath": "hiru3009_pythonproject/newpy.py",
-        "code": "import boto3\nses = boto3.client(\"ses\")\nsns = boto3.client(\"sns\")\n\ndef handler(event, context):\n    \n    try:\n        data = ses.send_email(\n    \t\tDestination={\n    \t\t    \"ToAddresses\": ['hirudineel@gmail.com'],\n    \t\t\t\"CcAddresses\": [],\n    \t\t\t\"BccAddresses\": []\n    \t\t},\n    \t\tMessage={\n    \t\t\t\"Body\": {\n    \t\t\t    \"Text\": {\n    \t\t\t\t\t\"Data\": 'Sample body'\n    \t\t\t\t}\n    \t\t\t},\n    \t\t\t\"Subject\": { \n    \t\t\t\t\"Data\": 'This is a test'\n    \t\t\t}\n    \t\t},\n    \t\tSource='hirudinee@adroitlogic.com'\n        )\n    except BaseException as e:\n        print(e)\n        raise(e)\n  \n\n    return {\"message\": \"Successfully executed\"}\n",
+        "code": "import boto3\nses = boto3.client(\"ses\")\nsns = boto3.client(\"sns\")\n\ndef handler(event, context):\n    \n    try:\n        data = ses.send_email(\n    \t\tDestination={\n    \t\t    \"ToAddresses\": ['hirudineel@gmail.com'],\n    \t\t\t\"CcAddresses\": [],\n    \t\t\t\"BccAddresses\": []\n    \t\t},\n    \t\tMessage={\n    \t\t\t\"Body\": {\n    \t\t\t    \"Text\": {\n    \t\t\t\t\t\"Data\": 'Sample body'\n    \t\t\t\t}\n    \t\t\t},\n    \t\t\t\"Subject\": { \n    \t\t\t\t\"Data\": 'This is a test'\n    \t\t\t}\n    \t\t},\n    \t\tSource='hirudinee@adroitlogic.com'\n        )\n        print(data)\n    except BaseException as e:\n        print(e)\n        raise(e)\n  \n\n    return {\"message\": \"Successfully executed\"}\n",
         "config": {
           "runtime": "python2.7",
           "handler": "handler",
@@ -184,7 +184,7 @@
     "projectRegion": "us-east-1",
     "platform": "AWS",
     "platformRegions": {},
-    "lastSave": 1569838200053
+    "lastSave": 1569838606222
   },
   "VCS_STATE": {
     "provider": "GitHub",

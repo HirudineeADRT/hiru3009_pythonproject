@@ -43,7 +43,7 @@
         "children": [],
         "isRemovable": true,
         "filePath": "hiru3009_pythonproject/newpy.py",
-        "code": "import boto3\ns3 = boto3.client(\"s3\")\nses = boto3.client(\"ses\")\nsns = boto3.client(\"sns\")\n\ndef handler(event, context):\n    \n    try:\n        data = ses.send_email(\n    \t\tDestination={\n    \t\t    \"ToAddresses\": ['hirudineel@gmail.com'],\n    \t\t\t\"CcAddresses\": [],\n    \t\t\t\"BccAddresses\": []\n    \t\t},\n    \t\tMessage={\n    \t\t\t\"Body\": {\n    \t\t\t    \"Text\": {\n    \t\t\t\t\t\"Data\": 'Sample body'\n    \t\t\t\t}\n    \t\t\t},\n    \t\t\t\"Subject\": { \n    \t\t\t\t\"Data\": 'This is a test'\n    \t\t\t}\n    \t\t},\n    \t\tSource='hirudinee@adroitlogic.com'\n        )\n        print(data)\n    except BaseException as e:\n        print(e)\n        raise(e)\n\n        try:\n            data = s3.list_objects(\n                Bucket='hirudinee0508',\n                MaxKeys=10,\n                Prefix=''\n            )\n            print(data)\n            \"\"\"\n            data = {\n                \"Contents\": [\n                   {\n                      \"ETag\": \"\\\"70ee1738b6b21e2c8a43f3a5ab0eee71\\\"\",\n                      \"Key\": \"example1.jpg\",\n                      \"LastModified\": \"<Date Representation>\",\n                      \"Owner\": {\n                         \"DisplayName\": \"myname\",\n                         \"ID\": \"12345example25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc\"\n                      },\n                      \"Size\": 11,\n                      \"StorageClass\": \"STANDARD\"\n                   },\n                   # {...}\n               ]\n            }\n            \"\"\"\n        except BaseException as e:\n            print(e)\n        \n  \n\n    return {\"message\": \"Successfully executed\"}\n",
+        "code": "import boto3\nddb = boto3.client(\"dynamodb\")\ns3 = boto3.client(\"s3\")\nses = boto3.client(\"ses\")\nsns = boto3.client(\"sns\")\n\ndef handler(event, context):\n    \n    data = ses.send_email(\n        Destination={\n            \"ToAddresses\": ['hirudineel@gmail.com'],\n            \"CcAddresses\": [],\n            \"BccAddresses\": []\n        },\n        Message={\n            \"Body\": {\n                \"Text\": {\n                    \"Data\": 'Sample body'\n                }\n            },\n            \"Subject\": { \n                \"Data\": 'This is a test'\n            }\n        },\n        Source='hirudinee@adroitlogic.com'\n    )\n    print(data)\n\n    data = s3.list_objects(\n        Bucket='hirudinee0508',\n        MaxKeys=10,\n        Prefix=''\n    )\n    print(data)\n    \"\"\"\n    data = {\n        \"Contents\": [\n            {\n                \"ETag\": \"\\\"70ee1738b6b21e2c8a43f3a5ab0eee71\\\"\",\n                \"Key\": \"example1.jpg\",\n                \"LastModified\": \"<Date Representation>\",\n                \"Owner\": {\n                    \"DisplayName\": \"myname\",\n                    \"ID\": \"12345example25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc\"\n                },\n                \"Size\": 11,\n                \"StorageClass\": \"STANDARD\"\n            },\n            # {...}\n        ]\n    }\n    \"\"\"\n    try:\n        data = s3.put_object(\n            Body=\"test\",\n            Bucket=\"hirudinee0508\",\n            Key=\"sample\"\n        )\n        print(data)\n        \"\"\"\n        data = {\n            \"ETag\": \"\\\"6805f2cfc46c0f04559748bb039d69ae\\\"\",\n            \"VersionId\": \"pSKidl4pHBiNwukdbcPXAIs.sshFFOc0\"\n        }\n        \"\"\"\n    except BaseException as e:\n        print(e)\n\n    try:\n            data = s3.get_object(\n                Bucket=\"hirudinee0508\",\n                Key=\"*\"\n            )\n            print(data)\n            \"\"\"\n            data = {\n                \"AcceptRanges\": \"bytes\", \n                \"ContentLength\": 3191, \n                \"ContentType\": \"image/jpeg\", \n                \"ETag\": \"\\\"6805f2cfc46c0f04559748bb039d69ae\\\"\", \n                \"LastModified\": \"<Date Representation>\", \n                \"Metadata\": {}, \n                \"TagCount\": 2, \n                \"VersionId\": \"null\"\n            }\n            \"\"\"\n    except BaseException as e:\n            print(e)\n\n    try:\n            data = s3.get_bucket_location(Bucket=\"hirudinee0508q\")\n            print(data)\n            print('test')\n            \"\"\"\n            data = {\n                \"LocationConstraint\": \"us-west-2\"\n            }\n            \"\"\"\n    except BaseException as e:\n            print(e)\n\n        try:\n            data = ddb.put_item(\n                TableName='hirudB',\n                Item={'name':{'S':'hiru'},'testid':{'S':'001'}}\n            )\n        except BaseException as e:\n            print(e)\n            raise(e)\n\n\n\n    return {\"message\": \"Successfully executed\"}\n",
         "config": {
           "runtime": "python2.7",
           "handler": "handler",
@@ -152,6 +152,40 @@
             "name": "hirudinee0508"
           }
         }
+      },
+      "ddbhirudB": {
+        "name": "ddbhirudB",
+        "type": "DynamoDB",
+        "config": {
+          "mode": 0,
+          "operation": "put",
+          "table": {
+            "arn": "",
+            "name": "hirudB",
+            "partitionKey": "testid",
+            "partitionKeyType": "S",
+            "hasSortKey": false,
+            "sortKey": "",
+            "sortKeyType": "S",
+            "payPerRequest": true,
+            "mode": 0
+          },
+          "isGlobalEditMode": false,
+          "parameters": {
+            "Key": {},
+            "Item": {
+              "name": "hiru",
+              "testid": "001"
+            },
+            "ExpressionAttributeValues": {}
+          },
+          "triggerParams": {},
+          "validator": {
+            "validatableFields": {},
+            "validity": true
+          },
+          "valid": true
+        }
       }
     },
     "customTemplate": {
@@ -195,7 +229,7 @@
     "projectRegion": "us-east-1",
     "platform": "AWS",
     "platformRegions": {},
-    "lastSave": 1569839202782
+    "lastSave": 1569844155501
   },
   "VCS_STATE": {
     "provider": "GitHub",
